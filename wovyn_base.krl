@@ -20,7 +20,7 @@ ruleset io.picolabs.wovyn_base {
     select when wovyn heartbeat
     pre{
       genericThingIsPresent = (event:attrs{"genericThing"} != null)
-      temperature = (genericThingIsPresent) => event:attrs{"temperature"} | null
+      temperature = (genericThingIsPresent) => event:attrs{"genericThing"}{"data"}{"temperature"}[0]{"temperatureF"} | null
       timestamp = time:now()
     }
     if genericThingIsPresent then
